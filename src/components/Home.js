@@ -6,11 +6,17 @@ export default function Home() {
   const [input, setInput] = useState("");
   const [layout, setLayout] = useState("default");
   const [hangWord, setHangWord] = useState("");
-  // const [userGuessArray, setUserGuessArray] =
+  const [userGuessArray, setUserGuessArray] = useState([])
+
+
   const wordOverSix = async () => {
     const word = await randomWordGen();
     if (word.length >= 6) {
-      return setHangWord(word);
+        setHangWord(word)
+        let splitWord = word.split("")
+        return setUserGuessArray(()=>{
+            return splitWord.map((item)=>{ return "_"})
+        });
     } else {
       wordOverSix();
     }
@@ -21,8 +27,7 @@ export default function Home() {
     if (userGuessArray.length === 0) {
     }
   }
-  const splitWord = hangWord.split("");
-  const userGuessArray = splitWord.map((letter) => "_");
+ 
 
   return (
     <div>
